@@ -59,7 +59,6 @@ class CustomHeader(Static):
         self.banner = Text(self.template).format(world=world)
 
 class DemoApp(App):
-    """A Textual app to manage stopwatches."""
 
     BINDINGS = [
     ("q","quit","Quit"),
@@ -67,13 +66,8 @@ class DemoApp(App):
     ]
 
     def compose(self) -> ComposeResult:
-        """Create child widgets for the app."""
         yield CustomHeader(template="Hello {world}")
         yield Footer()
-
-    def action_toggle_dark(self) -> None:
-        """An action to toggle dark mode."""
-        self.dark = not self.dark
 
     def action_toggle_header(self) -> None:
         widget = self.query_one(CustomHeader)

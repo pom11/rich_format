@@ -14,7 +14,7 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
 	readme = readme_file.read()
 
-requirements = ["rich"]
+requirements = ["rich","textual"]
 
 setup_requirements = [ ]
 
@@ -38,7 +38,8 @@ setup(
 	description="Format rich Text",
 	entry_points={
 		'console_scripts': [
-			'rich_format.test=rich_format.test:console_test'
+			'rich_format.test=rich_format.test:console_test',
+			"rich_format.demo=rich_format.app:run"
 		],
 	},
 	install_requires=requirements,
