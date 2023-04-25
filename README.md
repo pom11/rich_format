@@ -28,6 +28,8 @@ import rich_format
 ### Textual
 You can use `rich_format` in `textual` to format easier `reactive` in custom widgets
 
+`rich_format.demo`
+
 ```python
 from textual.reactive import reactive
 from textual.app import App, ComposeResult
