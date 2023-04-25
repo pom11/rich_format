@@ -29,15 +29,60 @@ import rich_format
 You can use `rich_format` in `textual` to format easier `reactive` in custom widgets
 
 ```python
-class Footer(Static):
-	banner : Text = reactive(Text("Hello {world}"))
-	world : str = reactive("world")
+from textual.reactive import reactive
+from textual.app import App, ComposeResult
+from textual.widgets import Footer
+from textual.widgets import Static
+from rich.text import Text
+import rich_format
+import random
 
-	def watch_banner(self, banner: Text) -> None:
-		self.update(banner)
+city = [
+    Text.from_markup("from [blue on red]London[/]"),
+    Text.from_markup("from [magenta on blue]New York[/]"),
+    Text.from_markup("from [green]Bucharest[/]"),
+    Text.from_markup("from [red on white]Tokyo[/]")
+]
 
-	def watch_world(self, world: str) -> None:
-		self.banner = self.banner.format(world=world)
+class CustomHeader(Static):
+    banner : Text = reactive(Text(""))
+    world : str = reactive("")
+
+    def __init__(self, template: str) -> None:
+        self.template = template
+        super().__init__()
+
+    def watch_banner(self, banner: Text) -> None:
+        self.update(banner)
+
+    def watch_world(self, world: str) -> None:
+        self.banner = Text(self.template).format(world=world)
+
+class DemoApp(App):
+    """A Textual app to manage stopwatches."""
+
+    BINDINGS = [
+    ("q","quit","Quit"),
+    ("h", "toggle_header", "Random header")
+    ]
+
+    def compose(self) -> ComposeResult:
+        """Create child widgets for the app."""
+        yield CustomHeader(template="Hello {world}")
+        yield Footer()
+
+    def action_toggle_dark(self) -> None:
+        """An action to toggle dark mode."""
+        self.dark = not self.dark
+
+    def action_toggle_header(self) -> None:
+        widget = self.query_one(CustomHeader)
+        widget.world = random.choice(city)
+
+
+if __name__ == "__main__":
+    app = DemoApp()
+    app.run()
 ```
 
 ## Installation
