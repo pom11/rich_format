@@ -25,6 +25,20 @@ from rich.text import Text
 import rich_format
 ```
 
+### Textual
+You can use `rich_format` in `textual` to format easier `reactive` in custom widgets
+
+```python
+class Footer(Static):
+	banner : Text = reactive(Text("Hello {world}"))
+	world : str = reactive("world")
+
+	def watch_banner(self, banner: Text) -> None:
+		self.update(banner)
+
+	def watch_world(self, world: str) -> None:
+		self.banner = self.banner.format(world=world)
+```
 
 ## Installation
 ### Stable release - pypi

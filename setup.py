@@ -3,7 +3,7 @@
 __author__ = "pom11"
 __copyright__ = "Copyright 2023, Parsec Original Mastercraft S.R.L."
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __maintainer__ = "pom11"
 __email__ = "office@parsecom.ro"
 
@@ -51,6 +51,6 @@ setup(
 	packages=find_packages(include=['rich_format', 'rich_format.*']),
 	setup_requires=setup_requirements,
 	url='https://github.com/pom11/rich_format',
-	version='0.0.1',
+	version='0.0.2',
 	zip_safe=True,
 )
